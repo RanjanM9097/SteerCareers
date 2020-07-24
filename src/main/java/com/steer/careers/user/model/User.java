@@ -27,6 +27,9 @@ public class User {
 	private String email;
 	private String regId;
 	private String pwd;
+	private String date;
+	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Job> jobs = new ArrayList<>();
 
@@ -96,6 +99,13 @@ public class User {
 
 	public void setJobs(List<Job> jobs) {
 		this.jobs = jobs;
+	}
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	@Override

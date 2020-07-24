@@ -1,5 +1,7 @@
 package com.steer.careers.user.serviceimpl;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,16 +34,21 @@ public class UserServiceImpl implements UserService {
         return sb.toString(); 
 	}
 	@Override
-	public boolean usrerRegistration(User user) {
-		
-		System.out.println("userservice : data "+user.toString());
-		
-		if(user!=null) {
-			repository.save(user);
-			return true;
+	public Long userRegistration(User user) {
+		User userid= new User();
+		try {
+			if(user!=null) {
+				repository.save(user);
+				userid=repository.findById(user.getId()).get();
+				return userid.getId();
+			
+			}
+		}
+		catch(NoSuchElementException ex) {
+			System.out.println(ex.getMessage());
 		}
 		
-		return false;
+		return null;
 	}
 	
 }

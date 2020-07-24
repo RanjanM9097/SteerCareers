@@ -1,6 +1,8 @@
 package com.steer.careers.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,18 +20,17 @@ public class UserController {
 	private UserService service;
 	
 	@PostMapping("/register")
-	public String userRegistration(@RequestBody User user) {
-		  user.setRegId(service.setAlphaNumericString(10));
-		System.out.println("contoller :user value"+user.toString());
+	public ResponseEntity<?> userregistration(@RequestBody User user){
+		Long userid=service.userRegistration(user);
+		if(userid!= null)
+			return new ResponseEntity<>("user registration success : user id : " +userid ,HttpStatus.OK);
+		return new ResponseEntity<>("registration failed ", HttpStatus.BAD_REQUEST);
 		
-		if(user!=null) {
-			service.usrerRegistration(user);
-		 
-		return "Registration success" ;
-		}
-		return "Registration faild";
+		
 		
 	}
+
+	
 
 	
 	 

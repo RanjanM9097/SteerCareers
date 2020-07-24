@@ -81,5 +81,11 @@ public class Job {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	@Override
+	public String toString() {
+		return "Job [jobId=" + jobId + ", experience=" + experience + ", validity=" + validity + ", location="
+				+ location + ", jobTitle=" + jobTitle + ", companyName=" + companyName + ", jobType=" + jobType
+				+ ", user=" + user + "]";
+	}
 	
 }

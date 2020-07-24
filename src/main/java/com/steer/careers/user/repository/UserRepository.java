@@ -1,5 +1,7 @@
 package com.steer.careers.user.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
@@ -13,5 +15,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
 	User findByEmailAndPwd(String email, String pwd);
 	
 	User findById(String role);
+	Optional<User> findById(Long id);
 
 }
