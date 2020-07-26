@@ -21,12 +21,13 @@ public class LoginController {
 	private LoginService loginservice;
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginDTO dto) {
+		System.out.println( "Dto email and password"+dto.getEmail()+"   "+dto.getPwd());
 		
 		
-		Long userId = loginservice.Login(dto.getEmail(),dto.getPwd());
+	boolean isSaved = loginservice.Login(dto.getEmail(),dto.getPwd());
 		
-		if(userId !=null)
-			return new ResponseEntity<>("Login Success "+userId,HttpStatus.OK);
+		if(isSaved)
+			return new ResponseEntity<>("Login Success "+dto.getEmail(),HttpStatus.OK);
 		return new ResponseEntity<>("Incorrect Email or Password", HttpStatus.UNAUTHORIZED);
 	}
 

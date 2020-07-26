@@ -1,7 +1,6 @@
 package com.steer.careers.user.serviceimpl;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,14 +16,16 @@ public class LoginServiceImpl implements LoginService{
 	
 
 	@Override
-	public Long Login(String email, String pwd) {
-		List<User> user = new ArrayList<>();
+	public boolean Login(String email, String pwd) {
+		
+		User user= userrepo.findByEmailAndPwd(email, pwd);
 	 
-		if(email!=null && pwd !=null) {
-			userrepo.save(userrepo.findByEmailAndPwd(email, pwd));
-		user=(List<User>) userrepo.findAll();
+		if(user!=null) {
+			
+			userrepo.save(user);  
+		return   true;
 		}
-		return null;
+		return false;
 		
 		
 	}
