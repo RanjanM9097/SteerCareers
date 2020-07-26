@@ -21,12 +21,12 @@ public class LoginController {
 	private LoginService loginservice;
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginDTO dto) {
-		System.out.println("login data "+dto.toString());
+		
 		
 		Long userId = loginservice.Login(dto.getEmail(),dto.getPwd());
 		
 		if(userId !=null)
-			return new ResponseEntity<>(userId,HttpStatus.OK);
+			return new ResponseEntity<>("Login Success "+userId,HttpStatus.OK);
 		return new ResponseEntity<>("Incorrect Email or Password", HttpStatus.UNAUTHORIZED);
 	}
 
